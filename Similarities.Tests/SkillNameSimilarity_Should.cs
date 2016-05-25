@@ -5,12 +5,12 @@ using Similarities;
 namespace Similarities.Tests
 {
     [TestClass]
-    public class SkillSimilarity_Should
+    public class SkillNameSimilarity_Should
     {
         [TestMethod]
         public void Should_Match()
         {
-            var similarity = new SkillSimilarity();
+            var similarity = new SkillNameSimilarity();
             var match = similarity.Match("JavaScript Web Developer", RuleSelectors());
 
             Assert.AreEqual("JavaScript/ASP.NET Web Developer", match);

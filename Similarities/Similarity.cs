@@ -29,7 +29,7 @@ namespace Similarities
         }
     }
 
-    public class SkillSimilarity : Similarity
+    public class SkillNameSimilarity : Similarity
     {
         protected override string Process(string s)
         {
