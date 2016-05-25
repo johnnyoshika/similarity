@@ -15,5 +15,17 @@ namespace Similarities.Tests
 
             Assert.AreEqual("IBM", match);
         }
+
+        [TestMethod]
+        public void Match_Microsoft()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match("Microsoft",
+                "Microsof Corp",
+                "Microsoft Inc"
+            );
+
+            Assert.AreEqual("Microsoft Inc", match);
+        }
     }
 }
