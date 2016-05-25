@@ -8,7 +8,7 @@ namespace Similarities.Tests
     public class CompanyNameSimilarity_Should
     {
         [TestMethod]
-        public void Should_Match()
+        public void Match_Similar_Names()
         {
             var similarity = new CompanyNameSimilarity();
             var match = similarity.Match("International Business Machines", "IBM");

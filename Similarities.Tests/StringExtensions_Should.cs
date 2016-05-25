@@ -5,10 +5,10 @@ using Similarities;
 namespace Similarities.Tests
 {
     [TestClass]
-    public class StringExtensionsTests
+    public class StringExtensions_Should
     {
         [TestMethod]
-        public void Stem_Should_Stem_Words()
+        public void Stem_Words()
         {
             string s = "running";
             string result = s.Stem();
@@ -17,7 +17,7 @@ namespace Similarities.Tests
         }
 
         [TestMethod]
-        public void StripStopwords_Should_Remove_To()
+        public void Strip_Stopwords()
         {
             string s = "go to mall";
             string result = s.StripStopwords();
@@ -26,7 +26,7 @@ namespace Similarities.Tests
         }
 
         [TestMethod]
-        public void StripPunctuations_Should_Strip_Commas()
+        public void Strip_Punctuations()
         {
             string s = "foo,bar";
             string result = s.StripPunctuations();

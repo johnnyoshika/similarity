@@ -8,7 +8,7 @@ namespace Similarities.Tests
     public class SkillNameSimilarity_Should
     {
         [TestMethod]
-        public void Should_Match()
+        public void Match_Similar_Names()
         {
             var similarity = new SkillNameSimilarity();
             var match = similarity.Match("JavaScript Web Developer", RuleSelectors());
