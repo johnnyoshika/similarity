@@ -56,8 +56,7 @@ namespace Similarities
         protected override string Process(string s)
         {
             return s
-                .StripPunctuations()
-                .Stem();
+                .StripPunctuations();
         }
     }
 
