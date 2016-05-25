@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="JobTitleSimilarity_Should.cs" />
     <Compile Include="CompanyNameSimilarity_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkillNameSimilarity_Should.cs" />

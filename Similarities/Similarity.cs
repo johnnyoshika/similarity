@@ -29,6 +29,17 @@ namespace Similarities
         }
     }
 
+    public class JobTitleSimilarity : Similarity
+    {
+        protected override string Process(string s)
+        {
+            return s
+                .StripStopwords()
+                .StripPunctuations()
+                .Stem();
+        }
+    }
+
     public class SkillNameSimilarity : Similarity
     {
         protected override string Process(string s)
