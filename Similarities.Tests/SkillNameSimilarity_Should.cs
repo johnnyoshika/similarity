@@ -7,6 +7,10 @@ namespace Similarities.Tests
     [TestClass]
     public class SkillNameSimilarity_Should
     {
+
+        ///<remarks>
+        ///check for first word match with least similarity score and avoid when there is priority clash
+        ///</remarks>
         [TestMethod]
         public void Match_Similar_Names()
         {
@@ -15,6 +19,92 @@ namespace Similarities.Tests
 
             Assert.AreEqual("JavaScript/ASP.NET Web Developer", match);
         }
+        ///<remarks>
+        ///check for word match
+        ///</remarks>
+        [TestMethod]
+        public void Programmer_Analyst()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match(".NET 2.0",
+".NET 3.0",
+".NET 3.5",
+".NET 4.0");
+
+            Assert.AreEqual(".NET 4.5", match);
+        }
+
+        ///<remarks>
+        ///check for levenshtein distance and and if it is more than a limit check for first word match and further two word macth if the string is of length >=3 
+        ///</remarks>
+        public void CIVIL()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match("CIVIL CONSTRUCTION",
+    "CIVIL DESIGN",
+    "CIVIL DRAFTING",
+    "CIVIL EIT",
+    "CIVIL ENGINEER",
+    "CIVIL ENGINEERING",
+    "civil engineering construction",
+    "CIVIL ENGINEERING DEGREE",
+    "CIVIL ENGINEERING DESIGN",
+    "CIVIL ENGINEERING LAND DEVELOPMENT",
+    "CIVIL ENGINEERS");
+
+            Assert.AreEqual("CIVIL SITE", match);
+        }
+
+        ///<remarks>
+        ///check for removal of numeric values
+        ///</remarks>
+
+        public void Microsoft()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match("MICROSOFT EXCEL",
+                "MICROSOFT OFFICE",
+                "MICROSOFT OFFICE 2000",
+                "MICROSOFT OFFICE 2003");
+
+            Assert.AreEqual("MICROSOFT OFFICE 2010", match);
+        }
+
+        ///<remarks>
+        ///levenshtein
+        ///</remarks>
+
+        public void TROUBLESHOOT()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match("TROUBLESHOOT/DIAGNOSE",
+                "TROUBLESHOOT / MAINTAIN",
+                "TROUBLE - SHOOTING");
+
+            Assert.AreEqual("TROUBLE-SHOOT", match);
+        }
+        ///<remarks>
+        ///levenshtein
+        ///</remarks>
+        public void data()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match("DATA CLEANSING");
+
+            Assert.AreEqual("DATA CLEANING", match);
+        }
+        ///<remarks>
+        ///levenshtein
+        ///</remarks>
+        public void data_analy()
+        {
+            var similarity = new CompanyNameSimilarity();
+            var match = similarity.Match("DATA ANALYSIS",
+                "DATA ANALYTICS");
+
+            Assert.AreEqual("DATA ANALYST", match);
+        }
+
 
         string[] RuleSelectors()
         {
