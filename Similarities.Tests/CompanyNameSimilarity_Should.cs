@@ -14,7 +14,9 @@ namespace Similarities.Tests
         public void Match_Similar_Names()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("IBM", "IBM");
+            var match = similarity.Match("IBM", 
+                "International Business Machines"
+            );
 
             Assert.AreEqual("International Business Machines", match);
         }
@@ -40,7 +42,8 @@ namespace Similarities.Tests
         public void GlobalRelay()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("GLOBAL RELAY COMMUNICATIONS INC","Global Relay"
+            var match = similarity.Match("GLOBAL RELAY COMMUNICATIONS INC",
+                "Global Relay"
             );
 
             Assert.AreEqual("Global Relay", match);
@@ -50,8 +53,10 @@ namespace Similarities.Tests
         public void Amazon()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("AMZN CAN Fulfillment Svcs, Inc","Amazon Canada Fulfillment Services Inc.",
-                "Amazon Canada Fulfillment Services, Inc","Amazon Canada Fulfillment Services, Inc.",
+            var match = similarity.Match("AMZN CAN Fulfillment Svcs, Inc", 
+                "Amazon Canada Fulfillment Services Inc.",
+                "Amazon Canada Fulfillment Services, Inc",
+                "Amazon Canada Fulfillment Services, Inc.",
                 "Amazon Web Services",
                 "AMZN CAN Fulfillment Svcs, Inc."
             );
