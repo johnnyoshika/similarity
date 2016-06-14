@@ -21,6 +21,11 @@ namespace Similarities
             return Regex.Replace(s, @"[^\w\s]", " ");
         }
 
+        public static string StripSpaces(this string s)
+        {
+            return s.Replace(" ", string.Empty);
+        }
+
         public static string StripStopwords(this string s)
         {
             var stopwords = new[]

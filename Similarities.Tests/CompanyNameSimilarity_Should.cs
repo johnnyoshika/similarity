@@ -54,14 +54,13 @@ namespace Similarities.Tests
         {
             var similarity = new CompanyNameSimilarity();
             var match = similarity.Match("AMZN CAN Fulfillment Svcs, Inc", 
+                "Amazon Canada Fulfillment Services, Inc.",
                 "Amazon Canada Fulfillment Services Inc.",
                 "Amazon Canada Fulfillment Services, Inc",
-                "Amazon Canada Fulfillment Services, Inc.",
-                "Amazon Web Services",
-                "AMZN CAN Fulfillment Svcs, Inc."
+                "Amazon Web Services"
             );
 
-            Assert.AreEqual("Amazon Canada Fulfillment Services, Inc", match);
+            Assert.AreEqual("Amazon Canada Fulfillment Services Inc.", match);
         }
         ///<remarks>
         ///check for first word match with least similarity score and avoid when there is priority clash

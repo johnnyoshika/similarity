@@ -13,12 +13,14 @@ namespace Similarities
             var rank = sources
                 .Select(s => new { Original = s, Score = Result(Process(s), Process(check)) })
                 .OrderByDescending(s => s.Score)
+                .ThenBy(s => s.Original.Length)
+                .ThenBy(s => s.Original.ToLower())
                 .ToArray();
 
             if (rank.Count() == 0)
                 return null;
 
-            if (rank.First().Score > 0.85)
+            if (rank.First().Score >= 0.8)
                 return rank.First().Original;
             else
                 return null;
@@ -62,10 +64,8 @@ namespace Similarities
 
         protected override double Result(string s1, string s2)
         {
-            var match = new CompanyNameMatch();
-            return match.Match(s1, s2) ? 1 : 0;
+            return new CompanyNameMatch().Score(s1, s2);
         }
     }
-
 
 }

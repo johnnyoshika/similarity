@@ -9,22 +9,31 @@ namespace Similarities
     class CompanyNameMatch
     {
 
-        public bool Match(string s1, string s2)
+        public double Score(string s1, string s2)
         {
             if (string.IsNullOrWhiteSpace(s1) || string.IsNullOrWhiteSpace(s2))
-                return false;
+                return 0;
 
             string shorter = Shorter(s1, s2);
             string longer = Longer(s1, s2);
 
             var intersection = s1.Words().Intersect(s2.Words());
             if (intersection.Count() == shorter.Words().Count())
-                return true;
+                return 1;
 
             if (shorter[0] != longer[0])
-                return false;
+                return 0;
 
-            return SequentialCharacterMatch(longer, shorter);
+            if(SequentialCharacterMatch(
+                longer.ToLower().StripSpaces(), 
+                shorter.ToLower().StripSpaces()
+            ))
+                return 0.9;
+
+            if (string.Equals(s1.Words().First(), s2.Words().First(), StringComparison.OrdinalIgnoreCase))
+                return 0.8;
+
+            return 0;
         }
 
         bool SequentialCharacterMatch(string longer, string shorter)
@@ -47,7 +56,7 @@ namespace Similarities
             if (s2 == null)
                 return s2;
 
-            return s1.Count() < s2.Count() ? s1 : s2;
+            return s1.StripSpaces().Count() < s2.StripSpaces().Count() ? s1 : s2;
         }
 
         string Longer(string s1, string s2)
@@ -58,7 +67,7 @@ namespace Similarities
             if (s2 == null)
                 return s1;
 
-            return s1.Count() < s2.Count() ? s2 : s1;
+            return s1.StripSpaces().Count() < s2.StripSpaces().Count() ? s2 : s1;
         }
 
     }
