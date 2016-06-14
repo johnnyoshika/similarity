@@ -12,7 +12,8 @@ namespace Similarities
         {
             var rank = sources
                 .Select(s => new { Original = s, Score = Result(Process(s), Process(check)) })
-                .OrderByDescending(s => s.Score);
+                .OrderByDescending(s => s.Score)
+                .ToArray();
 
             if (rank.Count() == 0)
                 return null;
@@ -23,7 +24,7 @@ namespace Similarities
                 return null;
         }
 
-        double Result(string s1, string s2)
+        protected virtual double Result(string s1, string s2)
         {
             return s1.JaccardIndex(s2);
         }
@@ -57,6 +58,12 @@ namespace Similarities
         {
             return s
                 .StripPunctuations();
+        }
+
+        protected override double Result(string s1, string s2)
+        {
+            var match = new CompanyNameMatch();
+            return match.Match(s1, s2) ? 1 : 0;
         }
     }
 
