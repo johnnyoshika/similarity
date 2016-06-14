@@ -33,7 +33,7 @@ namespace Similarities.Tests
                 "Abebooks.com, an Amazon company"
             );
 
-            Assert.AreEqual("AbeBooks, an Amazon company", match);
+            Assert.AreEqual("Abebooks.com", match);
         }
         ///<remarks>
         ///Double check,always compare with string of smaller length

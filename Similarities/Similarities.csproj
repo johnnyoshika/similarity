@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompanyNameMatch.cs" />
+    <Compile Include="SequentialCharacterMatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Similarity.cs" />
     <Compile Include="StringExtensions.cs" />

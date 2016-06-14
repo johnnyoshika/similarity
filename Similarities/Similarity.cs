@@ -11,7 +11,7 @@ namespace Similarities
         public string Match(string check, params string[] sources)
         {
             var rank = sources
-                .Select(s => new { Original = s, Score = Result(Process(s), Process(check)) })
+                .Select(s => new { Original = s, Score = Score(Process(s), Process(check)) })
                 .OrderByDescending(s => s.Score)
                 .ThenBy(s => s.Original.Length)
                 .ThenBy(s => s.Original.ToLower())
@@ -20,16 +20,13 @@ namespace Similarities
             if (rank.Count() == 0)
                 return null;
 
-            if (rank.First().Score >= 0.8)
+            if (rank.First().Score >= 0.65)
                 return rank.First().Original;
             else
                 return null;
         }
 
-        protected virtual double Result(string s1, string s2)
-        {
-            return s1.JaccardIndex(s2);
-        }
+        protected abstract double Score(string s1, string s2);
     }
 
     public class JobTitleSimilarity : Similarity
@@ -38,8 +35,12 @@ namespace Similarities
         {
             return s
                 .StripStopwords()
-                .StripPunctuations()
-                .Stem();
+                .StripPunctuations();
+        }
+
+        protected override double Score(string s1, string s2)
+        {
+            return s1.JaccardIndex(s2);
         }
     }
 
@@ -52,6 +53,11 @@ namespace Similarities
                 .StripPunctuations()
                 .Stem();
         }
+
+        protected override double Score(string s1, string s2)
+        {
+            return s1.JaccardIndex(s2);
+        }
     }
 
     public class CompanyNameSimilarity : Similarity
@@ -62,9 +68,9 @@ namespace Similarities
                 .StripPunctuations();
         }
 
-        protected override double Result(string s1, string s2)
+        protected override double Score(string s1, string s2)
         {
-            return new CompanyNameMatch().Score(s1, s2);
+            return new SequentialCharacterMatch().Score(s1, s2);
         }
     }
 

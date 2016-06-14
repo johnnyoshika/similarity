@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Similarities
 {
-    class CompanyNameMatch
+    class SequentialCharacterMatch
     {
 
         public double Score(string s1, string s2)
@@ -24,7 +24,7 @@ namespace Similarities
             if (shorter[0] != longer[0])
                 return 0;
 
-            if(SequentialCharacterMatch(
+            if(Match(
                 longer.ToLower().StripSpaces(), 
                 shorter.ToLower().StripSpaces()
             ))
@@ -36,7 +36,7 @@ namespace Similarities
             return 0;
         }
 
-        bool SequentialCharacterMatch(string longer, string shorter)
+        bool Match(string longer, string shorter)
         {
             var index = longer.IndexOf(shorter[0]);
             if (index == -1)
@@ -45,7 +45,7 @@ namespace Similarities
             if (shorter.Count() == 1)
                 return true;
 
-            return SequentialCharacterMatch(longer.Substring(index+1), shorter.Substring(1));
+            return Match(longer.Substring(index+1), shorter.Substring(1));
         }
 
         string Shorter(string s1, string s2)

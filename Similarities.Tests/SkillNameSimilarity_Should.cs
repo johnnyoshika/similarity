@@ -15,7 +15,7 @@ namespace Similarities.Tests
         public void Match_Similar_Names()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match("JavaScript Web Developer", RuleSelectors());
+            var match = similarity.Match("JavaScript Web Developer", Rules());
 
             Assert.AreEqual("JavaScript/ASP.NET Web Developer", match);
         }
@@ -25,88 +25,95 @@ namespace Similarities.Tests
         [TestMethod]
         public void Programmer_Analyst()
         {
-            var similarity = new CompanyNameSimilarity();
+            var similarity = new SkillNameSimilarity();
             var match = similarity.Match(".NET 2.0",
-".NET 3.0",
-".NET 3.5",
-".NET 4.0");
+                ".NET 3.0",
+                ".NET 3.5",
+                ".NET 4.0"
+            );
 
-            Assert.AreEqual(".NET 4.5", match);
+            Assert.AreEqual(".NET 3.0", match);
         }
 
         ///<remarks>
         ///check for levenshtein distance and and if it is more than a limit check for first word match and further two word macth if the string is of length >=3 
         ///</remarks>
+        [TestMethod]
         public void CIVIL()
         {
-            var similarity = new CompanyNameSimilarity();
+            var similarity = new SkillNameSimilarity();
             var match = similarity.Match("CIVIL CONSTRUCTION",
-    "CIVIL DESIGN",
-    "CIVIL DRAFTING",
-    "CIVIL EIT",
-    "CIVIL ENGINEER",
-    "CIVIL ENGINEERING",
-    "civil engineering construction",
-    "CIVIL ENGINEERING DEGREE",
-    "CIVIL ENGINEERING DESIGN",
-    "CIVIL ENGINEERING LAND DEVELOPMENT",
-    "CIVIL ENGINEERS");
+                "CIVIL DESIGN",
+                "CIVIL DRAFTING",
+                "CIVIL EIT",
+                "CIVIL ENGINEER",
+                "CIVIL ENGINEERING",
+                "civil engineering construction",
+                "CIVIL ENGINEERING DEGREE",
+                "CIVIL ENGINEERING DESIGN",
+                "CIVIL ENGINEERING LAND DEVELOPMENT",
+                "CIVIL ENGINEERS");
 
-            Assert.AreEqual("CIVIL SITE", match);
+            Assert.AreEqual("civil engineering construction", match);
         }
 
         ///<remarks>
         ///check for removal of numeric values
         ///</remarks>
-
+        [TestMethod]
         public void Microsoft()
         {
-            var similarity = new CompanyNameSimilarity();
+            var similarity = new SkillNameSimilarity();
             var match = similarity.Match("MICROSOFT EXCEL",
                 "MICROSOFT OFFICE",
                 "MICROSOFT OFFICE 2000",
                 "MICROSOFT OFFICE 2003");
 
-            Assert.AreEqual("MICROSOFT OFFICE 2010", match);
+            Assert.AreEqual("MICROSOFT OFFICE", match);
         }
 
         ///<remarks>
         ///levenshtein
         ///</remarks>
-
+        [TestMethod]
         public void TROUBLESHOOT()
         {
-            var similarity = new CompanyNameSimilarity();
+            var similarity = new SkillNameSimilarity();
             var match = similarity.Match("TROUBLESHOOT/DIAGNOSE",
                 "TROUBLESHOOT / MAINTAIN",
-                "TROUBLE - SHOOTING");
+                "TROUBLE - SHOOTING",
+                "TROUBLE-SHOOT");
 
-            Assert.AreEqual("TROUBLE-SHOOT", match);
+            Assert.AreEqual("TROUBLESHOOT / MAINTAIN", match);
         }
         ///<remarks>
         ///levenshtein
         ///</remarks>
+        [TestMethod]
         public void data()
         {
-            var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("DATA CLEANSING");
+            var similarity = new SkillNameSimilarity();
+            var match = similarity.Match("DATA CLEANSING",
+                "DATA CLEANING");
 
             Assert.AreEqual("DATA CLEANING", match);
         }
         ///<remarks>
         ///levenshtein
         ///</remarks>
+        [TestMethod]
         public void data_analy()
         {
-            var similarity = new CompanyNameSimilarity();
+            var similarity = new SkillNameSimilarity();
             var match = similarity.Match("DATA ANALYSIS",
-                "DATA ANALYTICS");
+                "DATA ANALYTICS",
+                "DATA ANALYST");
 
             Assert.AreEqual("DATA ANALYST", match);
         }
 
 
-        string[] RuleSelectors()
+        string[] Rules()
         {
             return new[]
             {
