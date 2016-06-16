@@ -14,9 +14,7 @@ namespace Similarities.Tests
         public void Match_Similar_Names()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("IBM", 
-                "International Business Machines"
-            );
+            var match = similarity.Match("IBM", Rules());
 
             Assert.AreEqual("International Business Machines", match);
         }
@@ -27,11 +25,7 @@ namespace Similarities.Tests
         public void AbeBooks()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("AbeBooks Inc.",
-                "AbeBooks, an Amazon company",
-                "Abebooks.com",
-                "Abebooks.com, an Amazon company"
-            );
+            var match = similarity.Match("AbeBooks Inc.", Rules());
 
             Assert.AreEqual("Abebooks.com", match);
         }
@@ -42,9 +36,7 @@ namespace Similarities.Tests
         public void GlobalRelay()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("GLOBAL RELAY COMMUNICATIONS INC",
-                "Global Relay"
-            );
+            var match = similarity.Match("GLOBAL RELAY COMMUNICATIONS INC", Rules());
 
             Assert.AreEqual("Global Relay", match);
         }
@@ -53,12 +45,7 @@ namespace Similarities.Tests
         public void Amazon()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("AMZN CAN Fulfillment Svcs, Inc", 
-                "Amazon Canada Fulfillment Services, Inc.",
-                "Amazon Canada Fulfillment Services Inc.",
-                "Amazon Canada Fulfillment Services, Inc",
-                "Amazon Web Services"
-            );
+            var match = similarity.Match("AMZN CAN Fulfillment Svcs, Inc", Rules());
 
             Assert.AreEqual("Amazon Canada Fulfillment Services Inc.", match);
         }
@@ -69,9 +56,7 @@ namespace Similarities.Tests
         public void enCompass()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("enCompass Data Solutions",
-                "enCompass Solutions Group"
-            );
+            var match = similarity.Match("enCompass Data Solutions", Rules());
 
             Assert.AreEqual("enCompass Solutions Group", match);
         }
@@ -82,9 +67,7 @@ namespace Similarities.Tests
         public void executrade()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("Executrade – Your Recruitment Specialists",
-                "Executrade ? Your Recruitment Specialists"
-            );
+            var match = similarity.Match("Executrade – Your Recruitment Specialists", Rules());
 
             Assert.AreEqual("Executrade ? Your Recruitment Specialists", match);
         }
@@ -96,9 +79,7 @@ namespace Similarities.Tests
         public void Falcon()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("Falcon Software Company, Inc.",
-                "Falcon - Software"
-            );
+            var match = similarity.Match("Falcon Software Company, Inc.", Rules());
 
             Assert.AreEqual("Falcon - Software", match);
         }
@@ -110,12 +91,82 @@ namespace Similarities.Tests
         public void Weston_Bakeries()
         {
             var similarity = new CompanyNameSimilarity();
-            var match = similarity.Match("Weston Bakeries Ltd./ Savoury Foods",
-                "Weston Bakeries Limited"
-            );
+            var match = similarity.Match("Weston Bakeries Ltd./ Savoury Foods", Rules());
 
             Assert.AreEqual("Weston Bakeries Limited", match);
         }
 
+        string[] Rules()
+        {
+            return new[]
+            {
+                "International Business Machines",
+                "AbeBooks, an Amazon company",
+                "Abebooks.com",
+                "Abebooks.com, an Amazon company",
+                "Global Relay",
+                "Amazon Canada Fulfillment Services, Inc.",
+                "Amazon Canada Fulfillment Services Inc.",
+                "Amazon Canada Fulfillment Services, Inc",
+                "Amazon Web Services",
+                "enCompass Solutions Group",
+                "Executrade ? Your Recruitment Specialists",
+                "Falcon - Software",
+                "Weston Bakeries Limited",
+                "BMC Software",
+                "Deloitte Canada",
+                "Fortinet",
+                "Global Relay",
+                "HERE",
+                "Hyperwallet",
+                "ISM CANADA",
+                "Logibec",
+                "Modis",
+                "OneMedNet",
+                "Point Grey",
+                "Quick Mobile",
+                "Reliable Controls",
+                "Safe Software Inc.",
+                "Samsung Electronics Canada",
+                "Seon",
+                "SPEEDLINE SOLUTIONS, INC.",
+                "TEEMA Solutions Group",
+                "TNI PrimeTime Promotions Inc",
+                "Transparent Solutions Corp.",
+                "WaterTrax",
+                "Whitewater West Industries",
+                "ZE PowerGroup",
+                "LOGIBEC INC",
+                "Intel Corporation",
+                "MediaValet",
+                "Nikls",
+                "Payfirma Corporation",
+                "Ping Identity",
+                "Primetime Promotions Inc",
+                "Qube Buildings Ltd",
+                "Seaspan",
+                "Sysorex",
+                "Texture",
+                "Trimble",
+                "Vision 7 International",
+                "Weston Foods Canada",
+                "xMatters",
+                "ZincNyx Energy Solutions Inc.",
+                "Viking Air Ltd",
+                "SNC - Lavalin",
+                "Radware",
+                "OneMedNet",
+                "McElhanney",
+                "lululemon athletica",
+                "Inuktun Services",
+                "Industrial Alliance",
+                "Graham",
+                "Fluxwerx",
+                "dpointtechnologies",
+                "Cymax Stores Inc.",
+                "Codan Radio Communications",
+                "Buyatab Online Inc."
+            };
+        }
     }
 }
