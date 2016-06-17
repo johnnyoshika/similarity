@@ -26,11 +26,7 @@ namespace Similarities.Tests
         public void Programmer_Analyst()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match(".NET 2.0",
-                ".NET 3.0",
-                ".NET 3.5",
-                ".NET 4.0"
-            );
+            var match = similarity.Match(".NET 2.0", Rules() );
 
             Assert.AreEqual(".NET 3.0", match);
         }
@@ -42,17 +38,7 @@ namespace Similarities.Tests
         public void CIVIL()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match("CIVIL CONSTRUCTION",
-                "CIVIL DESIGN",
-                "CIVIL DRAFTING",
-                "CIVIL EIT",
-                "CIVIL ENGINEER",
-                "CIVIL ENGINEERING",
-                "civil engineering construction",
-                "CIVIL ENGINEERING DEGREE",
-                "CIVIL ENGINEERING DESIGN",
-                "CIVIL ENGINEERING LAND DEVELOPMENT",
-                "CIVIL ENGINEERS");
+            var match = similarity.Match("CIVIL CONSTRUCTION",Rules() );
 
             Assert.AreEqual("civil engineering construction", match);
         }
@@ -64,10 +50,7 @@ namespace Similarities.Tests
         public void Microsoft()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match("MICROSOFT EXCEL",
-                "MICROSOFT OFFICE",
-                "MICROSOFT OFFICE 2000",
-                "MICROSOFT OFFICE 2003");
+            var match = similarity.Match("MICROSOFT EXCEL",Rules() );
 
             Assert.AreEqual("MICROSOFT OFFICE", match);
         }
@@ -79,10 +62,7 @@ namespace Similarities.Tests
         public void TROUBLESHOOT()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match("TROUBLESHOOT/DIAGNOSE",
-                "TROUBLESHOOT / MAINTAIN",
-                "TROUBLE - SHOOTING",
-                "TROUBLE-SHOOT");
+            var match = similarity.Match("TROUBLESHOOT/DIAGNOSE",Rules());
 
             Assert.AreEqual("TROUBLESHOOT / MAINTAIN", match);
         }
@@ -93,8 +73,7 @@ namespace Similarities.Tests
         public void data()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match("DATA CLEANSING",
-                "DATA CLEANING");
+            var match = similarity.Match("DATA CLEANSING",Rules() );
 
             Assert.AreEqual("DATA CLEANING", match);
         }
@@ -105,13 +84,46 @@ namespace Similarities.Tests
         public void data_analy()
         {
             var similarity = new SkillNameSimilarity();
-            var match = similarity.Match("DATA ANALYSIS",
-                "DATA ANALYTICS",
-                "DATA ANALYST");
+            var match = similarity.Match("DATA ANALYSIS",Rules() );
 
             Assert.AreEqual("DATA ANALYST", match);
         }
 
+        [TestMethod]
+        public void business()
+        {
+            var similarity = new SkillNameSimilarity();
+            var match = similarity.Match("Business Process Modelling", Rules());
+
+            Assert.AreEqual("business process outsourcing", match);
+        }
+
+        [TestMethod]
+        public void data_extract()
+        {
+            var similarity = new SkillNameSimilarity();
+            var match = similarity.Match("DATA EXTRACTION", Rules());
+
+            Assert.AreEqual("DATA COLLECTION", match);
+        }
+
+        [TestMethod]
+        public void train()
+        {
+            var similarity = new SkillNameSimilarity();
+            var match = similarity.Match("TRAIN-THE-TRAINER", Rules());
+
+            Assert.AreEqual("training solutions", match);
+        }
+
+        [TestMethod]
+        public void train()
+        {
+            var similarity = new SkillNameSimilarity();
+            var match = similarity.Match("PROBLEM SOLVING", Rules());
+
+            Assert.AreEqual("TECHNICAL PROBLEM SOLVING", match);
+        }
 
         string[] Rules()
         {
@@ -245,7 +257,34 @@ namespace Similarities.Tests
                 "Web Programmer",
                 "Web Software Developer",
                 "Web/HTML developer",
-                "Website Developer"
+                "Website Developer",
+                ".NET 3.0",
+                ".NET 3.5",
+                ".NET 4.0",
+                "CIVIL DESIGN",
+                "CIVIL DRAFTING",
+                "CIVIL EIT",
+                "CIVIL ENGINEER",
+                "CIVIL ENGINEERING",
+                "civil engineering construction",
+                "CIVIL ENGINEERING DEGREE",
+                "CIVIL ENGINEERING DESIGN",
+                "CIVIL ENGINEERING LAND DEVELOPMENT",
+                "CIVIL ENGINEERS",
+                "MICROSOFT OFFICE",
+                "MICROSOFT OFFICE 2000",
+                "MICROSOFT OFFICE 2003",
+                "TROUBLESHOOT / MAINTAIN",
+                "TROUBLE - SHOOTING",
+                "TROUBLE-SHOOT",
+                "DATA CLEANING",
+                "DATA ANALYTICS",
+                "DATA ANALYST",
+                "business process outsourcing",
+                "DATA COLLECTION",
+                "training solutions",
+                "TRAINING OBJECTIVES"
+
             };
         }
     }
